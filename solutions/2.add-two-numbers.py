@@ -16,36 +16,29 @@ class ListNode:
         self.val = val
         self.next = next
 from typing import List, Optional
-import copy
 
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        numbers = []
+        bump = 0
+        listnode_root = n = ListNode(0)
 
-        # First we want to assemble the linked list into an operable number (I know you can do this in 1 pass but this is easier to understand)
-        for listnode in (l1, l2):
-            assembled_number = 0
+        while l1 or l2 or bump:
+            if not l1:
+                l1 = ListNode(0, None)
+            if not l2:
+                l2 = ListNode(0, None)
 
-            # Traverse the listnode down, starting with the smallest digit
-            i = 0
-            while listnode:
-                assembled_number += (listnode.val * (10**i)) # Construct an assembled number from the digits, multiplying by 10^i
-                i += 1
-                listnode = listnode.next
+            val = l1.val + l2.val + bump
+            bump, val = divmod(val, 10)
 
-            numbers.append(assembled_number)
+            n.next = ListNode(val) 
 
-        summed = sum(numbers)
-        sum_list = [int(d) for d in str(summed)]
-
-        # We can now assembled the linked list, starting with the last link as the largest digit
-        returned_listnode = None 
-        while len(sum_list) != 0:
-            num = sum_list.pop(0)
-            returned_listnode = ListNode(num, copy.deepcopy(returned_listnode))
-
-        return returned_listnode
+            n = n.next
+            l1 = l1.next
+            l2 = l2.next
+        
+        return listnode_root.next
 
 # @lc code=end
 
