@@ -9,8 +9,7 @@ from collections import Counter
 # @lc code=start
 
 def string_to_occurances(string: str) -> list:
-    letters = list(string)
-    return Counter(letters).values()
+    return Counter(string).values()
 
 def string_unique_letters(string: str) -> set:
     return set(list(string))
@@ -29,7 +28,7 @@ class Solution:
         word2_letter_occurances = string_to_occurances(word2)
         
         # https://stackoverflow.com/questions/7828867/how-to-efficiently-compare-two-unordered-lists-not-sets
-        if Counter(word1_letter_occurances) != Counter(word2_letter_occurances):
+        if sorted(word1_letter_occurances) != sorted(word2_letter_occurances):
             return False
         
         # All the letters of each have to be in the other
