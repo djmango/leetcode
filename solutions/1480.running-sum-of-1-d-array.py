@@ -14,12 +14,11 @@ class Solution:
         
         last_sum = 0 # Store our last calculation so that we don't repeat addition operations
         
-        nums2 = []
-        for i in nums:
-            last_sum += i
-            nums2.append(last_sum)
+        for i, num in enumerate(nums):
+            last_sum += num
+            nums[i] = last_sum
             
-        return nums2
+        return nums
 
 # @lc code=end
 
