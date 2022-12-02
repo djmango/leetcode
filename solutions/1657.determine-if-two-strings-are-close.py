@@ -12,7 +12,7 @@ def string_to_occurances(string: str) -> list:
     return Counter(string).values()
 
 def string_unique_letters(string: str) -> set:
-    return set(list(string))
+    return set(string)
 
 class Solution:
 
@@ -27,18 +27,8 @@ class Solution:
         word1_letter_occurances = string_to_occurances(word1) 
         word2_letter_occurances = string_to_occurances(word2)
         
-        # https://stackoverflow.com/questions/7828867/how-to-efficiently-compare-two-unordered-lists-not-sets
-        if sorted(word1_letter_occurances) != sorted(word2_letter_occurances):
-            return False
-        
-        # All the letters of each have to be in the other
-        if string_unique_letters(word1) != string_unique_letters(word2):
-            return False
-        
-        # Now as far as I'm aware, these should be solvable. Actually now that I'm thinking about it, we don't even
-        # need to do the operation if these rules are correct, we can just return true
-        return True
-        
+        # These conditions validate if the strings are close, no need to do the actual operation
+        return (sorted(word1_letter_occurances) == sorted(word2_letter_occurances)) and (set(word1) == set(word2))
         
 # @lc code=end
 
