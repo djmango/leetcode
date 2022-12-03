@@ -15,10 +15,7 @@ from collections import Counter
 class Solution:
     def frequencySort(self, s: str) -> str:
         counted = Counter(s)
-        counted_sorted = {k: v for k, v in sorted(counted.items(), key=lambda item: item[1], reverse=True)}
-        
-        return ''.join([k*v for k, v in counted_sorted.items()])
-        
+        return ''.join([k*v for k, v in sorted(counted.items(), key=lambda item: item[1], reverse=True)])
         
 # @lc code=end
 
