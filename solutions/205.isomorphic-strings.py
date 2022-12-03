@@ -1,3 +1,8 @@
+# @before-stub-for-debug-begin
+from python3problem205 import *
+from typing import *
+# @before-stub-for-debug-end
+
 #
 # @lc app=leetcode id=205 lang=python3
 #
@@ -5,27 +10,28 @@
 #
 
 # @lc code=start
-
-from itertools import groupby
-
-def string_to_consecutive_occurances(string: str) -> list:
-    s = [[label, sum(1 for _ in group)] for label, group in groupby(string)]
-    
-    uniques = []
-    for i, group in enumerate(s):
-        label, count = group
-        if label not in uniques:
-            uniques.append(label)
-            
-        s[i][0] = uniques.index(label)
-    
-    return s
-        
-        
-
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        return string_to_consecutive_occurances(s) == string_to_consecutive_occurances(t)
+
+        mapping = {}
+        # s char -> t char
+        # s = foo, t = baa
+        # f -> b
+        # o -> a
+        
+        for i in range(len(s)):
+            if s[i] in mapping:
+                # Mapping must match if we already have it stored
+                if not mapping[s[i]] == t[i]:
+                    return False
+            else:
+                # If this is a new mapping make sure we dont already have the value stored, if not then store the mapping
+                if t[i] not in mapping.values():
+                    mapping[s[i]] = t[i]
+                else:
+                    return False
+        return True
+                
         
 # @lc code=end
 
